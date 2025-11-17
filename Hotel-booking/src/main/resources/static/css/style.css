@@ -31,9 +31,12 @@
 body {
   margin:0;
   min-height:100vh;
-  background:radial-gradient(circle at top,#1b2542 0%, transparent 45%),
-             radial-gradient(circle at 20% 20%, rgba(255,77,141,0.18), transparent 55%),
-             linear-gradient(135deg,var(--bg-deep),var(--bg-mid),var(--bg-accent));
+  background-image:linear-gradient(120deg,rgba(3,7,18,0.88),rgba(3,7,18,0.6)),
+                   url('/image/sky-sunset.jpg');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
   color:var(--text-primary);
   font-family:var(--font, 'Poppins');
   line-height:1.6;
@@ -1262,9 +1265,9 @@ body::before {
   background:
     radial-gradient(circle at 10% 10%, rgba(255,255,255,0.08), transparent 45%),
     radial-gradient(circle at 75% 20%, rgba(255,138,0,0.18), transparent 55%),
-    url('/image/image2.jpg');
-  background-size:100%, 100%, cover;
-  background-position:center top, center top, center 30%;
+    linear-gradient(160deg, rgba(3,7,18,0), rgba(3,7,18,0.55));
+  background-size:100%, 100%, 100%;
+  background-position:center top, center top, center;
   filter:saturate(110%) contrast(110%);
 }
 
