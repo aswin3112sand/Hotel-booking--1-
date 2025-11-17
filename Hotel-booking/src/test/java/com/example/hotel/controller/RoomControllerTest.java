@@ -1,84 +1,86 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.dto.BookingRequest;
 import com.example.hotel.dto.RoomSearchRequest;
-import com.example.hotel.config.JwtUtil;
 import com.example.hotel.entity.Room;
-import com.example.hotel.entity.RoomType;
-import com.example.hotel.service.DbUserDetailsService;
 import com.example.hotel.service.RoomService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RoomController.class)
-@AutoConfigureMockMvc(addFilters = false)
 class RoomControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private RoomService roomService;
 
-    @MockBean
-    private JwtUtil jwtUtil;
+    @InjectMocks
+    private RoomController roomController;
 
-    @MockBean
-    private DbUserDetailsService dbUserDetailsService;
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(roomController).build();
+    }
 
     @Test
-    void list_returnsRoomsView() throws Exception {
-        Room room = Room.builder()
+    void testListRooms() throws Exception {
+        Room room1 = Room.builder()
                 .id(1L)
-                .title("Skyline Suite")
-                .description("desc")
-                .roomType(RoomType.SUITE)
-                .price(new BigDecimal("10000"))
-                .city("Goa")
-                .location("Beach")
-                .maxGuests(2)
+                .title("Deluxe Room")
+                .price(BigDecimal.valueOf(150))
                 .build();
-        Page<Room> page = new PageImpl<>(List.of(room), PageRequest.of(0, 9), 1);
-        Mockito.when(roomService.searchRooms(any(RoomSearchRequest.class), any())).thenReturn(page);
+        Room room2 = Room.builder()
+                .id(2L)
+                .title("Standard Room")
+                .price(BigDecimal.valueOf(100))
+                .build();
+
+        List<Room> rooms = Arrays.asList(room1, room2);
+        Page<Room> roomPage = new PageImpl<>(rooms, PageRequest.of(0, 9), 2);
+
+        when(roomService.searchRooms(any(RoomSearchRequest.class), any(Pageable.class))).thenReturn(roomPage);
 
         mockMvc.perform(get("/rooms"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("rooms"))
-                .andExpect(model().attributeExists("rooms"));
+                .andExpect(model().attributeExists("rooms"))
+                .andExpect(model().attributeExists("page"));
     }
 
     @Test
-    void details_loadsRoom() throws Exception {
+    void testRoomDetails() throws Exception {
         Room room = Room.builder()
-                .id(2L)
-                .title("Lagoon")
-                .description("desc")
-                .roomType(RoomType.DELUXE)
-                .price(new BigDecimal("8000"))
-                .city("Goa")
-                .location("Candolim")
-                .maxGuests(2)
+                .id(1L)
+                .title("Deluxe Room")
+                .price(BigDecimal.valueOf(150))
                 .build();
-        Mockito.when(roomService.getRoom(2L)).thenReturn(room);
 
-        mockMvc.perform(get("/rooms/2"))
+        when(roomService.getRoom(1L)).thenReturn(room);
+
+        mockMvc.perform(get("/rooms/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("room-details"))
+                .andExpect(model().attributeExists("room"))
                 .andExpect(model().attributeExists("bookingRequest"));
     }
 }
