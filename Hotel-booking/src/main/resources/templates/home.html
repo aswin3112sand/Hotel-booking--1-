@@ -100,14 +100,23 @@
             </div>
             <p class="muted">Each card animates as you tweak the filters—watch the grid respond.</p>
         </div>
-        <div class="room-grid" id="roomGrid">
-            <article class="room-card" th:each="room : ${featuredRooms}"
+        <div class="room-grid" id="roomGrid"
+             th:with="fallbacks=${new java.lang.String[]{
+                '/image/1.jpg',
+                '/image/2.jpg',
+                '/image/3.jpg',
+                '/image/4.jpg',
+                '/image/5.jpg',
+                '/image/1.jpg'
+             }}">
+            <article class="room-card" th:each="room, stat : ${featuredRooms}"
                      th:data-city="${room.city != null ? room.city.toLowerCase() : ''}"
                      th:data-type="${room.roomType}"
                      th:data-price="${room.price}"
                      th:data-available="${room.available}">
                 <div class="room-media">
-                    <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}">
+                    <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}"
+                         th:attr="data-fallback=${fallbacks[stat.index % fallbacks.length]}">
                     <span class="badge" th:text="${room.roomType.label}"></span>
                 </div>
                 <div class="room-card-body">
@@ -157,6 +166,33 @@
                     <p class="muted" th:text="${room.maxGuests} + ' guests'"></p>
                 </div>
             </article>
+        </div>
+    </section>
+
+    <section class="image-gallery-section glass-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Gallery</p>
+                <h2>Featured Images</h2>
+            </div>
+            <p class="muted">Explore our curated collection of stunning hotel images.</p>
+        </div>
+        <div class="image-gallery-grid">
+            <div class="gallery-item">
+                <img th:src="@{/image/1.jpg}" alt="Hotel Image 1" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img th:src="@{/image/2.jpg}" alt="Hotel Image 2" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img th:src="@{/image/3.jpg}" alt="Hotel Image 3" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img th:src="@{/image/4.jpg}" alt="Hotel Image 4" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img th:src="@{/image/5.jpg}" alt="Hotel Image 5" class="gallery-img">
+            </div>
         </div>
     </section>
 </main>

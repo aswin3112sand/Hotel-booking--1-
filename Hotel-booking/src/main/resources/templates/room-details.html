@@ -14,7 +14,8 @@
     <section class="section glass-panel room-details">
         <div class="detail-gallery">
             <div class="detail-media">
-                <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}" loading="lazy">
+                <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}" loading="lazy"
+                     data-fallback="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80">
             </div>
             <div class="price-badge">
                 <span>₹</span>

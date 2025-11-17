@@ -128,3 +128,15 @@
     }
   });
 })();
+
+(function fallbackImages(){
+  const FALLBACK = 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80';
+  document.querySelectorAll('img[data-fallback]').forEach(img => {
+    img.addEventListener('error', () => {
+      if (img.dataset.fallbackApplied === 'true') return;
+      const custom = img.getAttribute('data-fallback') || FALLBACK;
+      img.dataset.fallbackApplied = 'true';
+      img.src = custom;
+    }, { once: false });
+  });
+})();

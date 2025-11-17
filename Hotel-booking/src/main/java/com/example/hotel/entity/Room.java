@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -74,6 +76,19 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings = new ArrayList<>();
 
+    private static final Map<String, String> CUSTOM_IMAGES = Map.of(
+            "azure crown suite", "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80"
+    );
+
+    private static final List<String> FALLBACK_IMAGES = List.of(
+            "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1501117716987-c8e1ecb210cc?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1549187774-b4e9b0445b69?auto=format&fit=crop&w=900&q=80"
+    );
+
     @Transient
     public String getDisplayImage() {
         if (imagePath != null && !imagePath.isBlank()) {
@@ -82,7 +97,15 @@ public class Room {
         if (imageUrl != null && !imageUrl.isBlank()) {
             return imageUrl;
         }
-        return "https://images.unsplash.com/photo-1501117716987-c8e1ecb210cc?auto=format&fit=crop&w=800&q=80";
+        if (title != null) {
+            String key = title.trim().toLowerCase();
+            if (CUSTOM_IMAGES.containsKey(key)) {
+                return CUSTOM_IMAGES.get(key);
+            }
+        }
+        int hash = Objects.hash(id, title, city, location, maxGuests);
+        int index = Math.floorMod(hash, FALLBACK_IMAGES.size());
+        return FALLBACK_IMAGES.get(index);
     }
 
     @PrePersist

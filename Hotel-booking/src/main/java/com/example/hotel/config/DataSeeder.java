@@ -50,10 +50,10 @@ public class DataSeeder {
                                 "Fireplace, Heated floors, WiFi, Mountain concierge", "https://images.unsplash.com/photo-1505691938895-1758d7feb511"),
                         createRoom("Emerald Family Residence", "Spacious suite designed for families with indoor play nook.",
                                 RoomType.FAMILY, new BigDecimal("9999"), "Jaipur", "Amber Palace Lane", 5,
-                                "Play nook, Chef on call, WiFi", "https://images.unsplash.com/photo-1505691938895-1758d7feb511"),
+                                "Play nook, Chef on call, WiFi", "/image/3.jpg"),
                         createRoom("Cobalt Business Class", "Elegant city room for business travellers with ergonomic workspace.",
                                 RoomType.STANDARD, new BigDecimal("7499"), "Bengaluru", "UB City Plaza", 2,
-                                "Work desk, WiFi 1Gbps, Espresso bar", "https://images.unsplash.com/photo-1505691938895-1758d7feb511")
+                                "Work desk, WiFi 1Gbps, Espresso bar", "/image/4.jpg")
                 );
                 rooms.saveAll(seedRooms);
                 log.info("Seeded {} sample rooms", seedRooms.size());

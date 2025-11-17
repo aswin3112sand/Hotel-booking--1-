@@ -1,0 +1,166 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/C:/Users/riote/AppData/Roaming/Code/User/globalStorage/pleiades.java-extension-pack-jdk/maven/latest/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.example:hotel-booking >----------------------
+[INFO] Building Hotel Booking 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.5.7:run (default-cli) > test-compile @ hotel-booking >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hotel-booking ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 38 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ hotel-booking ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ hotel-booking ---
+[INFO] skip non existing resourceDirectory C:\Users\riote\Downloads\Hotel-booking (1)\Hotel-booking\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ hotel-booking ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.5.7:run (default-cli) < test-compile @ hotel-booking <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.5.7:run (default-cli) @ hotel-booking ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.7)
+
+2025-11-18T03:21:57.876+05:30  INFO 20304 --- [           main] c.example.hotel.HotelBookingApplication  : Starting HotelBookingApplication using Java 25.0.1 with PID 20304 (C:\Users\riote\Downloads\Hotel-booking (1)\Hotel-booking\target\classes started by riote in C:\Users\riote\Downloads\Hotel-booking (1)\Hotel-booking)
+2025-11-18T03:21:57.878+05:30 DEBUG 20304 --- [           main] c.example.hotel.HotelBookingApplication  : Running with Spring Boot v3.5.7, Spring v6.2.12
+2025-11-18T03:21:57.879+05:30  INFO 20304 --- [           main] c.example.hotel.HotelBookingApplication  : No active profile set, falling back to 1 default profile: "default"
+2025-11-18T03:21:59.068+05:30  INFO 20304 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-18T03:21:59.161+05:30  INFO 20304 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 3 JPA repository interfaces.
+2025-11-18T03:22:00.826+05:30  INFO 20304 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9090 (http)
+2025-11-18T03:22:00.854+05:30  INFO 20304 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-18T03:22:00.855+05:30  INFO 20304 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-11-18T03:22:00.963+05:30  INFO 20304 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-18T03:22:00.964+05:30  INFO 20304 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3027 ms
+2025-11-18T03:22:01.256+05:30  INFO 20304 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-18T03:22:01.321+05:30  INFO 20304 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.33.Final
+2025-11-18T03:22:01.362+05:30  INFO 20304 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-11-18T03:22:01.704+05:30  INFO 20304 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-18T03:22:01.742+05:30  INFO 20304 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-18T03:22:01.997+05:30  INFO 20304 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:hotel_booking user=SA
+2025-11-18T03:22:01.999+05:30  INFO 20304 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-18T03:22:02.080+05:30  INFO 20304 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-11-18T03:22:03.230+05:30  INFO 20304 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    create table bookings (
+        id bigint generated by default as identity,
+        check_in date not null,
+        check_out date not null,
+        created_at timestamp(6),
+        guests integer not null check (guests>=1),
+        status enum ('CANCELLED','CONFIRMED','PENDING') not null,
+        total_price numeric(12,2) not null,
+        updated_at timestamp(6),
+        room_id bigint not null,
+        user_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table rooms (
+        id bigint generated by default as identity,
+        amenities varchar(320),
+        available boolean not null,
+        city varchar(80) not null,
+        created_at timestamp(6),
+        description varchar(2000) not null,
+        featured boolean not null,
+        image_path varchar(255),
+        image_url varchar(255),
+        location varchar(160) not null,
+        max_guests integer not null check ((max_guests>=1) and (max_guests<=12)),
+        price numeric(10,2) not null,
+        room_type enum ('DELUXE','FAMILY','PENTHOUSE','STANDARD','SUITE') not null,
+        title varchar(120) not null,
+        updated_at timestamp(6),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        id bigint generated by default as identity,
+        email varchar(255) not null,
+        name varchar(80) not null,
+        password varchar(255) not null,
+        role enum ('ADMIN','USER') not null,
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists users 
+       drop constraint if exists UK6dotkott2kjsp8vw4d0m25fb7
+Hibernate: 
+    alter table if exists users 
+       add constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email)
+Hibernate: 
+    alter table if exists bookings 
+       add constraint FKrgoycol97o21kpjodw1qox4nc 
+       foreign key (room_id) 
+       references rooms
+Hibernate: 
+    alter table if exists bookings 
+       add constraint FKeyog2oic85xg7hsu2je2lx3s6 
+       foreign key (user_id) 
+       references users
+2025-11-18T03:22:03.323+05:30  INFO 20304 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-18T03:22:03.614+05:30 DEBUG 20304 --- [           main] com.example.hotel.config.JwtAuthFilter   : Filter 'jwtAuthFilter' configured for use
+2025-11-18T03:22:03.665+05:30  INFO 20304 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-11-18T03:22:05.281+05:30  INFO 20304 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-11-18T03:22:05.550+05:30  INFO 20304 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-11-18T03:22:05.607+05:30  INFO 20304 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name daoAuthProvider
+2025-11-18T03:22:05.608+05:30  WARN 20304 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-18T03:22:06.202+05:30  WARN 20304 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-18T03:22:06.207+05:30  INFO 20304 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-18T03:22:06.209+05:30  INFO 20304 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-11-18T03:22:06.212+05:30  INFO 20304 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-11-18T03:22:06.230+05:30  INFO 20304 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-18T03:22:06.251+05:30 ERROR 20304 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9090 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.608 s
+[INFO] Finished at: 2025-11-18T03:22:06+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.5.7:run (default-cli) on project hotel-booking: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
