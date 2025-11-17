@@ -19,8 +19,12 @@ WORKDIR /app
 RUN useradd -ms /bin/sh spring
 
 COPY --from=build /workspace/target/*.jar app.jar
-RUN chown -R spring:spring /app
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && chown -R spring:spring /app
+
+ENV UPLOAD_DIR=/app/uploads
 
 EXPOSE 9090
-USER spring
-ENTRYPOINT ["java","-jar","app.jar"]
+USER root
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

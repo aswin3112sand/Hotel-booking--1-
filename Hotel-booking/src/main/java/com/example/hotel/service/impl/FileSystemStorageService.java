@@ -19,11 +19,27 @@ public class FileSystemStorageService implements StorageService {
     private final Path storagePath;
 
     public FileSystemStorageService(@Value("${app.upload-dir:uploads}") String uploadDir) {
-        this.storagePath = Paths.get(uploadDir).toAbsolutePath().normalize();
+        String resolvedUploadDir = (uploadDir == null || uploadDir.isBlank()) ? "uploads" : uploadDir;
+        Path desiredPath = Paths.get(resolvedUploadDir).toAbsolutePath().normalize();
+        this.storagePath = initializeStorage(desiredPath);
+    }
+
+    private Path initializeStorage(Path desiredPath) {
         try {
-            Files.createDirectories(this.storagePath);
-        } catch (IOException ex) {
-            throw new IllegalStateException("Unable to create upload directory", ex);
+            Files.createDirectories(desiredPath);
+            return desiredPath;
+        } catch (IOException primaryEx) {
+            Path fallback = Paths.get(System.getProperty("java.io.tmpdir"), "hotel-uploads")
+                .toAbsolutePath()
+                .normalize();
+            try {
+                Files.createDirectories(fallback);
+                return fallback;
+            } catch (IOException fallbackEx) {
+                fallbackEx.addSuppressed(primaryEx);
+                throw new IllegalStateException(
+                    "Unable to create upload directory at " + desiredPath + " or fallback " + fallback, fallbackEx);
+            }
         }
     }
 
@@ -61,4 +77,3 @@ public class FileSystemStorageService implements StorageService {
         }
     }
 }
-
