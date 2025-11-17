@@ -1,0 +1,90 @@
+8:    .toolbar input,.toolbar select{background:#0f162b;border:1px solid var(--border);color:var(--text);padding:8px;border-radius:10px}
+9:    .pager{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:18px}
+10:    .pager a,.pager span{padding:8px 12px;border:1px solid var(--border);border-radius:10px}
+38:          <h3>Rooms</h3>
+39:          <div class="grid" th:if="${#lists.isEmpty(rooms)}">
+40:            <div class="empty">No rooms added yet.</div>
+39:          <div class="grid" th:if="${#lists.isEmpty(rooms)}">
+40:            <div class="empty">No rooms added yet.</div>
+41:          </div>
+40:            <div class="empty">No rooms added yet.</div>
+41:          </div>
+42:
+43:          <section class="grid" th:if="${!#lists.isEmpty(rooms)}">
+44:            <article class="card" th:each="r : ${rooms}">
+45:              <div class="card-header">
+44:            <article class="card" th:each="r : ${rooms}">
+45:              <div class="card-header">
+46:                <h4 th:text="${r.typeName}">Room</h4>
+46:                <h4 th:text="${r.typeName}">Room</h4>
+47:                <span class="badge" th:text="'₹ ' + ${r.pricePerNight} + ' / night'">₹ 0 / night</span>
+48:              </div>
+56:                th:object="${bookingReq}"
+57:                method="post">
+58:            <div class="card-header">
+65:              <!-- room select -->
+66:              <label>Room</label>
+67:              <select th:field="*{roomId}">
+67:              <select th:field="*{roomId}">
+68:                <option th:each="r : ${rooms}"
+69:                        th:value="${r.id}"
+68:                <option th:each="r : ${rooms}"
+69:                        th:value="${r.id}"
+70:                        th:text="${r.typeName} + ' (₹' + ${r.pricePerNight} + '/night)'">
+70:                        th:text="${r.typeName} + ' (₹' + ${r.pricePerNight} + '/night)'">
+71:                  Deluxe
+72:                </option>
+72:                </option>
+73:              </select>
+74:
+73:              </select>
+74:
+75:              <div class="grid-2" style="margin-top:10px">
+112:            <select name="minStars">
+113:              <option th:value="0" th:selected="${minStars==0}">Any stars</option>
+114:              <option th:value="1" th:selected="${minStars==1}">★ 1+</option>
+113:              <option th:value="0" th:selected="${minStars==0}">Any stars</option>
+114:              <option th:value="1" th:selected="${minStars==1}">★ 1+</option>
+115:              <option th:value="2" th:selected="${minStars==2}">★ 2+</option>
+114:              <option th:value="1" th:selected="${minStars==1}">★ 1+</option>
+115:              <option th:value="2" th:selected="${minStars==2}">★ 2+</option>
+116:              <option th:value="3" th:selected="${minStars==3}">★ 3+</option>
+115:              <option th:value="2" th:selected="${minStars==2}">★ 2+</option>
+116:              <option th:value="3" th:selected="${minStars==3}">★ 3+</option>
+117:              <option th:value="4" th:selected="${minStars==4}">★ 4+</option>
+116:              <option th:value="3" th:selected="${minStars==3}">★ 3+</option>
+117:              <option th:value="4" th:selected="${minStars==4}">★ 4+</option>
+118:              <option th:value="5" th:selected="${minStars==5}">★ 5</option>
+117:              <option th:value="4" th:selected="${minStars==4}">★ 4+</option>
+118:              <option th:value="5" th:selected="${minStars==5}">★ 5</option>
+119:            </select>
+118:              <option th:value="5" th:selected="${minStars==5}">★ 5</option>
+119:            </select>
+120:            <select name="size">
+119:            </select>
+120:            <select name="size">
+121:              <option th:value="8"  th:selected="${size==8}">8 / page</option>
+120:            <select name="size">
+121:              <option th:value="8"  th:selected="${size==8}">8 / page</option>
+122:              <option th:value="12" th:selected="${size==12}">12 / page</option>
+121:              <option th:value="8"  th:selected="${size==8}">8 / page</option>
+122:              <option th:value="12" th:selected="${size==12}">12 / page</option>
+123:              <option th:value="24" th:selected="${size==24}">24 / page</option>
+122:              <option th:value="12" th:selected="${size==12}">12 / page</option>
+123:              <option th:value="24" th:selected="${size==24}">24 / page</option>
+124:            </select>
+123:              <option th:value="24" th:selected="${size==24}">24 / page</option>
+124:            </select>
+125:            <button class="btn primary" type="submit">Search</button>
+124:            </select>
+125:            <button class="btn primary" type="submit">Search</button>
+126:            <a class="btn" th:href="@{/hotels}">Reset</a>
+136:            <article class="card" th:each="h : ${hotels}">
+137:              <div class="card-header">
+138:                <h3 th:text="${h.name}">Hotel Name</h3>
+143:              <a class="btn primary" th:href="@{/hotels/{id}(id=${h.id})}">View Rooms</a>
+144:            </article>
+145:          </section>
+153:            <span th:each="i : ${#numbers.sequence(0, pageData.totalPages-1)}"
+154:                  th:classappend="${i==pageData.number} ? 'active'">
+155:              <a th:if="${i!=pageData.number}"

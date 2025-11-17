@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room | Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+
+<main class="page-container page-container--wide">
+    <section class="section glass-panel form-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Inventory</p>
+                <h2>Add new room</h2>
+            </div>
+        </div>
+        <form th:action="@{/admin/rooms}" th:object="${room}" method="post" enctype="multipart/form-data" class="room-form">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" th:field="*{title}">
+                <div class="field-error" th:errors="*{title}"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea th:field="*{description}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Room type</label>
+                <select th:field="*{roomType}">
+                    <option th:each="type : ${roomTypes}" th:value="${type}" th:text="${type.label}"></option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Price per night</label>
+                    <input type="number" th:field="*{price}" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Max guests</label>
+                    <input type="number" th:field="*{maxGuests}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" th:field="*{city}">
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" th:field="*{location}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Amenities</label>
+                <input type="text" th:field="*{amenities}" placeholder="WiFi, Breakfast">
+            </div>
+
+            <div class="form-group">
+                <label>Image URL (optional)</label>
+                <input type="text" th:field="*{imageUrl}">
+            </div>
+
+            <div class="form-group">
+                <label>Upload image</label>
+                <input type="file" name="imageFile" accept="image/*">
+            </div>
+
+            <div class="form-group image-preview" th:if="${room.imageUrl != null and !room.imageUrl.isEmpty()}">
+                <label>Image preview</label>
+                <img class="img-fluid" th:src="${room.imageUrl}" alt="Room image preview" loading="lazy">
+            </div>
+
+            <div class="form-group toggle-group">
+                <label><input type="checkbox" th:field="*{featured}"> Featured</label>
+                <label><input type="checkbox" th:field="*{available}"> Available</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn btn-primary">Save room</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

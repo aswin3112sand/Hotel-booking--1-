@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header class="glass-nav" th:fragment="siteHeader" th:with="currentUri=${#httpServletRequest != null ? #httpServletRequest.requestURI : ''}">
+    <nav class="nav-shell">
+        <a class="brand" th:href="@{/}">
+            <span class="brand-icon">HB</span>
+            <span class="brand-text">Hotel Bliss</span>
+        </a>
+        <ul class="nav-links">
+            <li sec:authorize="hasRole('USER')"><a th:href="@{/user/bookings}">My Bookings</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/dashboard}">Admin</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a class="btn btn-nav" th:href="@{/}" th:classappend="${currentUri == '/' ? ' active' : ''}">Home</a>
+            <a class="btn btn-nav" th:href="@{/rooms}" th:classappend="${#strings.startsWith(currentUri,'/rooms') ? ' active' : ''}">Rooms</a>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <a sec:authorize="isAnonymous()" class="btn btn-outline" th:href="@{/login}">Login</a>
+            <a sec:authorize="isAnonymous()" class="btn btn-primary" th:href="@{/register}">Register</a>
+
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

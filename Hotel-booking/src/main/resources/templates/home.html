@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Bliss | Luxury Hotel Booking</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+
+<main class="page-container">
+    <section class="section hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Premium Collection</p>
+            <h1>Live inside luxury.</h1>
+            <p class="subtitle">Discover glassmorphism inspired hotel suites with curated experiences, gold accented interiors, and skyline views.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" th:href="@{/rooms}">Book a stay</a>
+                <a class="btn btn-outline" th:href="@{/rooms}">Explore rooms</a>
+            </div>
+            <div class="floating-icons">
+                <span>🏨</span>
+                <span>🛎️</span>
+                <span>🛏️</span>
+                <span>🍸</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-gallery">
+                <div class="hero-image primary">
+                    <img class="img-fluid" th:src="@{/image/image2.jpg}" alt="Luxury hotel suite" loading="lazy">
+
+                    <div class="hero-tag">
+                        <p class="tag-label">Skyline</p>
+                        <p class="tag-eyebrow">Signature penthouse</p>
+                        <p>Floor to ceiling city views</p>
+                        <p class="tag-strong">48 curated rooms</p>
+                    </div>
+                </div>
+                <div class="hero-image secondary">
+                    <img class="img-fluid" src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=60" alt="Lounge bar" loading="lazy">
+                </div>
+            </div>
+
+            <div class="live-booking-panel">
+                <div class="live-booking-head">
+                    <div>
+                        <p class="eyebrow">Live booking pulse</p>
+                        <h3>Guests are booking in real-time</h3>
+                    </div>
+                    <span class="status-pill">Online</span>
+                </div>
+                <div class="live-grid">
+                    <div class="live-metric">
+                        <p class="metric-label">Occupancy</p>
+                        <div class="metric-value">
+                            <strong th:text="${occupancyPercent} + '%'">72%</strong>
+                            <span th:text="${activeBookings} + ' active stays'"></span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" th:style="'width:' + ${occupancyPercent} + '%'"></div>
+                        </div>
+                    </div>
+                    <div class="live-stats">
+                        <div>
+                            <span>Confirmed stays</span>
+                            <p th:text="${confirmedBookings}">120</p>
+                        </div>
+                        <div>
+                            <span>Total rooms</span>
+                            <p th:text="${totalRooms}">28</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-feed">
+                    <div class="feed-item" th:each="booking : ${recentBookings}">
+                        <div>
+                            <strong th:text="${booking.user.name != null && !#strings.isEmpty(booking.user.name) ? booking.user.name : booking.user.email}">Guest</strong>
+                            <span th:text="${#temporals.format(booking.createdAt, 'hh:mm a')}">09:14 AM</span>
+                        </div>
+                        <p th:text="${booking.room.city} + ' · ' + ${booking.room.title}"></p>
+                    </div>
+                    <p class="muted" th:if="${#lists.isEmpty(recentBookings)}">No bookings yet. Be the first one to reserve a stay today.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section glass-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Signature Picks</p>
+                <h2>Featured Suites</h2>
+            </div>
+            <a class="link" th:href="@{/rooms}">Browse all</a>
+        </div>
+        <div class="card-grid">
+            <article class="room-card" th:each="room : ${featuredRooms}">
+                <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}" loading="lazy">
+                <div>
+                    <p class="room-city" th:text="${room.city}">City</p>
+                    <h3 th:text="${room.title}">Suite</h3>
+                    <p class="room-desc" th:text="${room.description}"></p>
+                    <div class="card-footer">
+                        <span class="price" th:text="'₹' + ${#numbers.formatDecimal(room.price, 0, 'COMMA', 2, 'POINT')} + ' / night'"></span>
+                        <a class="btn btn-primary" th:href="@{'/rooms/' + ${room.id}}">View</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section glass-panel secondary">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Just added</p>
+                <h2>New Arrivals</h2>
+            </div>
+        </div>
+        <div class="mini-grid">
+            <article class="mini-card" th:each="room : ${latestRooms}">
+                <div>
+                    <p class="room-city" th:text="${room.city}"></p>
+                    <h3 th:text="${room.title}"></h3>
+                </div>
+                <div>
+                    <p th:text="${room.roomType.label}"></p>
+                    <span class="price" th:text="'₹' + ${#numbers.formatDecimal(room.price, 0, 'COMMA', 2, 'POINT')}"></span>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

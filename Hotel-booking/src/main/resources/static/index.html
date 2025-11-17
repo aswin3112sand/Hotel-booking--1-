@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotel Portal</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <!-- Navbar (static page version) -->
+    <header class="nav">
+      <div class="navbar container container--md" id="top-nav">
+        <div class="d-flex align-items-center gap-3">
+          <a class="navbar-brand brand-gradient" href="/rooms" style="font-size:1.4rem; font-weight:800; letter-spacing:.4px;">HOTEL PORTAL</a>
+
+          <nav class="d-none d-md-flex align-items-center gap-2" aria-label="Primary">
+            <a class="nav-link" href="/rooms">Rooms</a>
+            <a id="my-bookings-link" class="nav-link" href="/me/bookings">My Bookings</a>
+            <a id="admin-link" class="nav-link" href="/admin">Admin</a>
+          </nav>
+        </div>
+
+        <!-- Right side: Auth actions -->
+        <div class="d-flex align-items-center gap-2 ms-auto">
+          <!-- When not logged in -->
+          <div id="auth-links" class="d-flex gap-2">
+            <a class="btn btn-sm btn-primary auth-cta" href="/login">Login</a>
+            <a class="btn btn-sm btn-primary auth-cta" href="/register">Register</a>
+          </div>
+
+          <!-- When logged in -->
+          <div id="user-info" class="d-flex align-items-center gap-2">
+            <span id="user-name" class="muted">User</span>
+            <button id="logout-btn" type="button" class="btn btn-sm btn-primary">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="card page-card">
+        <div class="card-body">
+          <h2>Hotel Portal</h2>
+          <p class="muted">Running on http://localhost:9090</p>
+          <a class="btn primary" href="/login">Go to Login</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/app.js" defer></script>
+  </body>
+  </html>

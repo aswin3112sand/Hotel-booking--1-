@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer class="site-footer" th:fragment="siteFooter">
+    <div class="footer-grid">
+        <div>
+            <h4>Hotel Bliss</h4>
+            <p>Luxury stays crafted for modern travelers. Experience curated hospitality across India.</p>
+        </div>
+        <div>
+            <h4>Visit</h4>
+            <p>Mahalaxmi Business Park<br/>Mumbai, India</p>
+        </div>
+        <div>
+            <h4>Contact</h4>
+            <p>booking@hotelbliss.io<br/>+91 8888 123 456</p>
+        </div>
+    </div>
+    <p class="footer-note">&copy; <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}"></span> Hotel Bliss. All rights reserved.</p>
+</footer>
+</body>
+</html>

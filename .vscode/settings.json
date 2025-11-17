@@ -1,0 +1,17 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "cSpell.words": [
+        "Aswin",
+        "Hotal",
+        "jdbc",
+        "jjwt",
+        "jsonwebtoken",
+        "Jwts",
+        "passwo",
+        "thymeleaf",
+        "webjars"
+    ],
+    "livePreview.defaultPreviewPath": "/Hotel-booking/src/main/resources/templates/admin.html"
+}

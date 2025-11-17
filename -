@@ -1,0 +1,340 @@
+#user-name{
+  color:var(--text);
+  opacity:.95;
+  font-weight:500;
+}
+
+/* =======================================================
+   3. BUTTONS
+   English: Global button styles.
+   Tamil: Ellā button um oru mathiri consistent ah irukkum.
+======================================================= */
+
+.btn{
+  border-radius:.6rem;
+  font-weight:600;
+  position:relative;
+  cursor:pointer;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  padding:8px 12px;
+  line-height:1.2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background-clip:padding-box;
+  min-height:38px;
+}
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+/* solid "blue primary" action button */
+.btn.primary{
+  background:linear-gradient(180deg,var(--primary),var(--primary-2));
+  border:none;
+  color:#fff;
+  box-shadow:0 6px 18px var(--glow);
+  padding:11px 14px;
+  border-radius:12px;
+  text-align:center;
+  background-clip:padding-box;
+}
+.btn.primary:hover{
+  background:linear-gradient(180deg,var(--primary-hover),var(--primary-2));
+  box-shadow:0 10px 24px var(--glow);
+  color:#fff;
+}
+
+/* alias like bootstrap .btn-primary (same style) */
+.btn-primary{
+  background:linear-gradient(180deg,var(--primary),var(--primary-2));
+  border:none;
+  color:#fff;
+  box-shadow:0 6px 18px var(--glow);
+  padding:11px 14px;
+  border-radius:12px;
+  background-clip:padding-box;
+}
+.btn-primary:hover{
+  background:linear-gradient(180deg,var(--primary-hover),var(--primary-2));
+  box-shadow:0 10px 24px var(--glow);
+  color:#fff;
+}
+
+/* outline style button */
+.btn-outline-primary{
+  color:var(--primary);
+  background:transparent;
+  border:1px solid var(--primary);
+  border-radius:12px;
+  padding:10px 14px;
+  line-height:1.2;
+  background-clip:padding-box;
+}
+.btn-outline-primary:hover{
+  background:var(--primary);
+  color:#fff;
+  box-shadow:0 6px 18px var(--glow);
+  border-color:var(--primary);
+}
+
+/* ✅ SPECIAL CTA BUTTON (hotel page login button)
+   English: stronger glow, lift, press effect.
+   Tamil: public hotels page la "Login" button shining a irukkum.
+   Usage in HTML: class="btn primary auth-cta"
+*/
+.btn.auth-cta {
+  background:linear-gradient(180deg,var(--primary),var(--primary-2));
+  border:none;
+  color:#fff;
+  box-shadow:0 6px 18px var(--glow);
+  padding:11px 14px;
+  border-radius:12px;
+  text-align:center;
+  background-clip:padding-box;
+  position:relative;
+  transition:all .22s ease;
+}
+.btn.auth-cta::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:12px;
+  background:radial-gradient(circle at 20% 20%, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 60%);
+  mix-blend-mode:screen;
+  pointer-events:none;
+  opacity:.4;
+  transition:opacity .2s ease, filter .2s ease;
+}
+.btn.auth-cta:hover {
+  background:linear-gradient(180deg,var(--primary-hover),var(--primary-2));
+  box-shadow:
+    0 0 14px rgba(13,110,253,.55),
+    0 10px 24px var(--glow);
+  transform:translateY(-2px) scale(1.02);
+  color:#fff;
+}
+.btn.auth-cta:hover::before {
+  opacity:.6;
+  filter:brightness(1.15);
+}
+.btn.auth-cta:active {
+  transform:scale(0.98);
+  box-shadow:0 0 6px rgba(13,110,253,.4);
+}
+
+/* remove ripple overlay (white flash) */
+.btn::before,
+.btn:active::before{
+  content:none;
+}
+
+/* loading spinner */
+.btn.loading{
+  position:relative;
+  pointer-events:none;
+  opacity:.85;
+}
+.btn.loading::after{
+  content:"";
+  position:absolute;
+  right:10px; top:50%;
+  width:14px; height:14px;
+  border:2px solid rgba(255,255,255,.75);
+  border-top-color:transparent;
+  border-radius:50%;
+  transform:translateY(-50%);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{
+  to{ transform:translateY(-50%) rotate(360deg) }
+}
+
+/* =======================================================
+   4. CARDS / PAGE WRAPPER
+   English: Main white box sections.
+   Tamil: idhu thaan container oda white-ish block.
+   NOTE: softened so it blends with body (no harsh box).
+======================================================= */
+
+.card{
+  background:color-mix(in srgb,var(--card) 88%, var(--bg));
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+  transform:translateY(0);
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 24px var(--glow);
+  border-color:var(--primary);
+}
+
+/* main center wrapper (Hotels page body big box)
+   English: we match body background tone, reduce contrast.
+   Tamil: "oru box varudhu" nu sonna box idhu. Ippo soft aa irukkum.
+*/
+.page-card{
+  max-width:100%;
+  margin:24px auto 32px;
+  padding:24px;
+  display:block;
+  backdrop-filter:none;
+  background:color-mix(in srgb,var(--card) 85%, var(--bg));
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
+}
+
+/* login/register page-card = glass style */
+body[data-page="login"] .page-card,
+body[data-page="register"] .page-card{
+  max-width:520px;
+  margin:56px auto 72px;
+  padding:24px 28px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  backdrop-filter: blur(10px) saturate(160%);
+  background:color-mix(in srgb,var(--card) 92%, transparent);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 14px 34px rgba(0,0,0,.35);
+}
+
+/* headings inside login/register card */
+body[data-page="login"] .page-card h2,
+body[data-page="login"] .page-card h3,
+body[data-page="register"] .page-card h2,
+body[data-page="register"] .page-card h3{
+  text-align:center;
+  margin-bottom:12px;
+  color:var(--primary);
+  font-weight:700;
+  letter-spacing:.3px;
+}
+body[data-page="login"] .page-card p,
+body[data-page="register"] .page-card p{
+  text-align:center;
+  margin-top:12px;
+  color:var(--muted);
+}
+body[data-page="login"] .page-card p a,
+body[data-page="register"] .page-card p a{
+  color:var(--primary);
+  font-weight:500;
+}
+body[data-page="login"] .page-card p a:hover,
+body[data-page="register"] .page-card p a:hover{
+  color:var(--primary-hover);
+}
+body[data-page="login"] .page-card .btn-primary,
+body[data-page="register"] .page-card .btn-primary{
+  width:100%;
+}
+
+/* =======================================================
+   5. GRID LAYOUT HELPERS
+   English: responsive card list + 2-col helper.
+   Tamil: auto-fit columns for hotel cards.
+======================================================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+}
+.grid-3{
+  grid-template-columns:repeat(1,1fr);
+}
+@media (min-width: 768px){
+  .grid-3{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width: 992px){
+  .grid-3{ grid-template-columns:repeat(3,1fr); }
+}
+.grid>*{
+  border-radius:var(--radius-md);
+}
+.grid>*:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 20px var(--glow);
+}
+
+/* check-in / check-out 2 columns */
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+@media (max-width: 640px){
+  .grid-2{ grid-template-columns:1fr; }
+}
+
+/* =======================================================
+   6. FORMS (BOOKING FORM, ADMIN FORMS)
+   English: label-top classic form style.
+   Tamil: Booking form la input box design.
+======================================================= */
+.form{ text-align:left; width:100%; }
+.form label{
+  display:block;
+  color:color-mix(in srgb,var(--text) 92%, #000);
+  font-weight:600;
+  margin:10px 0 6px;
+}
+.form input,
+.form textarea,
+.form select{
+  width:100%;
+  height:46px;
+  background:color-mix(in srgb,var(--card) 94%, var(--bg));
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 12px;
+  color:var(--text);
+  font-size:0.95rem;
+  line-height:1.3;
+}
+.form textarea{
+  height:auto;
+  min-height:96px;
+  resize:vertical;
+}
+.form input::placeholder{
+  color:color-mix(in srgb, var(--muted) 80%, var(--text));
+}
+.form input:hover,
+.form textarea:hover,
+.form select:hover{
+  border-color:var(--primary-hover);
+}
+.form input:focus-visible,
+.form textarea:focus-visible,
+.form select:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+}
+
+/* =======================================================
+   7. TEXT HELPERS / BADGES / TOAST / STATUS
+   English: badges, empty state, rating, toast.
+   Tamil: status message (green/yellow), hotel stars, etc.
+======================================================= */
+.badge{
+  background:color-mix(in srgb,var(--primary) 15%, var(--card));
+  color:color-mix(in srgb,var(--primary) 80%, var(--text));
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:.8rem;
+  line-height:1.2;
+  font-weight:600;
+}
+.badge:hover{
+  background:var(--primary);
+  color:#fff;

@@ -1,0 +1,15 @@
+30:        <form th:action="@{/bookings}" method="post" class="form inline" th:object="${bookingReq}">
+31:          <input type="hidden" th:field="*{hotelId}" th:value="${hotel.id}" />
+32:          <input type="hidden" th:field="*{roomId}" th:value="${r.id}" />
+31:          <input type="hidden" th:field="*{hotelId}" th:value="${hotel.id}" />
+32:          <input type="hidden" th:field="*{roomId}" th:value="${r.id}" />
+33:          <input type="date" th:field="*{checkIn}" required>
+32:          <input type="hidden" th:field="*{roomId}" th:value="${r.id}" />
+33:          <input type="date" th:field="*{checkIn}" required>
+34:          <input type="date" th:field="*{checkOut}" required>
+33:          <input type="date" th:field="*{checkIn}" required>
+34:          <input type="date" th:field="*{checkOut}" required>
+35:          <button class="btn primary block" type="submit">Book</button>
+34:          <input type="date" th:field="*{checkOut}" required>
+35:          <button class="btn primary block" type="submit">Book</button>
+36:        </form>

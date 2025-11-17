@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Hotel Bliss</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+
+<main class="page-container page-container--wide">
+    <section class="section glass-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Admin view</p>
+                <h2>Performance dashboard</h2>
+            </div>
+            <div class="hero-actions">
+                <a class="btn btn-outline" th:href="@{/admin/rooms}">Manage rooms</a>
+                <a class="btn btn-primary" th:href="@{/admin/bookings}">View bookings</a>
+            </div>
+        </div>
+        <div class="stat-grid">
+            <div class="stat-card">
+                <p>Total rooms</p>
+                <h3 th:text="${roomCount}"></h3>
+            </div>
+            <div class="stat-card">
+                <p>Active bookings</p>
+                <h3 th:text="${bookingCount}"></h3>
+            </div>
+            <div class="stat-card">
+                <p>Confirmed bookings</p>
+                <h3 th:text="${confirmedBookings}"></h3>
+            </div>
+            <div class="stat-card">
+                <p>Guests</p>
+                <h3 th:text="${userCount}"></h3>
+            </div>
+            <div class="stat-card">
+                <p>Revenue</p>
+                <h3 th:text="'₹' + ${#numbers.formatDecimal(revenue,0,'COMMA',2,'POINT')}"></h3>
+            </div>
+        </div>
+        <canvas id="bookingChart" width="400" height="120" data-bookings th:data-bookings="${confirmedBookings}" data-users th:data-users="${userCount}"></canvas>
+    </section>
+
+    <section class="section glass-panel secondary">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Recent</p>
+                <h2>Latest bookings</h2>
+            </div>
+        </div>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Dates</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${recentBookings}">
+                <td th:text="${booking.id}"></td>
+                <td th:text="${booking.user.email}"></td>
+                <td th:text="${booking.room.title}"></td>
+                <td th:text="${#temporals.format(booking.checkIn,'dd MMM')} + ' - ' + ${#temporals.format(booking.checkOut,'dd MMM')}"></td>
+                <td th:text="${booking.status}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

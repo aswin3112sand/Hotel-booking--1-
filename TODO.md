@@ -1,0 +1,8 @@
+- [x] Update hotels.html: add lang="en", use th:href for CSS, change h1.page-title to h2, ensure div.container
+- [x] Update admin.html: add lang="en", use th:href for CSS, change main.container to div.container, change h1.page-title to h2, fix duplicate sections and structure
+- [x] Update CSS to modern light theme: change variables to light colors, improve button styles, add shadows, better typography
+- [x] Reorder HTML in hotels.html: move h2 inside card-body, ensure logical flow of elements
+- [x] Reorder HTML in admin.html: move h2 inside card-body, reorder sections for better UX
+- [x] Check backend controllers and models for any design corrections (e.g., add validations, improve error handling)
+- [x] Check database models for corrections (e.g., add missing annotations, ensure relationships)
+- [x] Test functionality: run the app and check pages load correctly, verify frontend-backend-database integration (app started successfully on port 9090)

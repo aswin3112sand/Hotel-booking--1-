@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${room.title} + ' | Hotel Bliss'">Room</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+
+<main class="page-container">
+    <section class="section glass-panel room-details">
+        <div class="detail-gallery">
+            <div class="detail-media">
+                <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}" loading="lazy">
+            </div>
+            <div class="price-badge">
+                <span>₹</span>
+                <strong th:text="${#numbers.formatDecimal(room.price, 0, 'COMMA', 2, 'POINT')}"></strong>
+                <p>/ night</p>
+            </div>
+        </div>
+        <div class="detail-info">
+            <p class="eyebrow" th:text="${room.roomType.label}"></p>
+            <h1 th:text="${room.title}"></h1>
+            <p class="room-city" th:text="${room.city + ' · ' + room.location}"></p>
+            <p class="room-desc" th:text="${room.description}"></p>
+            <div class="detail-tags">
+                <span th:text="${room.maxGuests} + ' guests'"></span>
+                <span th:text="${room.amenities}"></span>
+            </div>
+
+            <div class="alert error" th:if="${error}" th:text="${error}"></div>
+
+            <form class="booking-form" th:action="@{'/rooms/' + ${room.id} + '/book'}"
+                  th:object="${bookingRequest}" method="post">
+                <div class="form-group">
+                    <label>Check in</label>
+                    <input type="date" th:field="*{checkIn}" required>
+                </div>
+                <div class="form-group">
+                    <label>Check out</label>
+                    <input type="date" th:field="*{checkOut}" required>
+                </div>
+                <div class="form-group">
+                    <label>Guests</label>
+                    <input type="number" th:field="*{guests}" min="1" max="8">
+                </div>
+                <button type="submit" class="btn btn-primary mt-md">Confirm booking</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

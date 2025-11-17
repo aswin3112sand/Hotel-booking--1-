@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Rooms | Hotel Bliss</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+
+<main class="page-container">
+    <section class="section glass-panel filter-panel">
+        <form th:action="@{/rooms}" method="get" class="filter-form" th:object="${filter}">
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" th:field="*{city}" placeholder="Search city or landmark">
+            </div>
+            <div class="form-group">
+                <label>Room type</label>
+                <select th:field="*{roomType}">
+                    <option value="">All</option>
+                    <option th:each="type : ${roomTypes}"
+                            th:value="${type}"
+                            th:text="${type.label}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Min price</label>
+                <input type="number" th:field="*{minPrice}" placeholder="4000">
+            </div>
+            <div class="form-group">
+                <label>Max price</label>
+                <input type="number" th:field="*{maxPrice}" placeholder="20000">
+            </div>
+            <div class="button-row">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="section glass-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Results</p>
+                <h2 th:text="'Showing ' + ${rooms.size()} + ' rooms'"></h2>
+            </div>
+        </div>
+        <div class="card-grid" th:if="${!#lists.isEmpty(rooms)}">
+            <article class="room-card" th:each="room : ${rooms}">
+                <img class="img-fluid" th:src="${room.displayImage}" th:alt="${room.title}" loading="lazy">
+                <div>
+                    <div class="badge" th:text="${room.roomType.label}"></div>
+                    <h3 th:text="${room.title}"></h3>
+                    <p class="room-city" th:text="${room.city + ' · ' + room.location}"></p>
+                    <p class="room-desc" th:text="${room.description}"></p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="price" th:text="'₹' + ${#numbers.formatDecimal(room.price,0,'COMMA',2,'POINT')}"></span>
+                            <p class="muted" th:text="${room.maxGuests} + ' guests'"></p>
+                        </div>
+                        <a class="btn btn-primary" th:href="@{'/rooms/' + ${room.id}}">Book now</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <p class="muted" th:if="${#lists.isEmpty(rooms)}">No rooms match your filters.</p>
+
+        <div class="paginator" th:if="${page != null}">
+            <a th:if="${page.hasPrevious()}"
+               th:href="@{/rooms(page=${page.number - 1}, size=${page.size}, city=${filter.city}, roomType=${filter.roomType}, minPrice=${filter.minPrice}, maxPrice=${filter.maxPrice})}">Prev</a>
+            <span>Page <span th:text="${page.number + 1}"></span> / <span th:text="${page.totalPages == 0 ? 1 : page.totalPages}"></span></span>
+            <a th:if="${page.hasNext()}"
+               th:href="@{/rooms(page=${page.number + 1}, size=${page.size}, city=${filter.city}, roomType=${filter.roomType}, minPrice=${filter.minPrice}, maxPrice=${filter.maxPrice})}">Next</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

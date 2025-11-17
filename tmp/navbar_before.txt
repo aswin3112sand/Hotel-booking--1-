@@ -1,0 +1,33 @@
+<header class="nav" th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container container--md">
+     <!-- <a class="navbar-brand brand-gradient" href="/hotels">Hotel Portal</a>-->
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#mainNav" aria-controls="mainNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <!-- LEFT: links (no bullets) -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="top-nav">
+          <li class="nav-item"><a class="nav-link" href="/hotels">Hotels</a></li>
+        </ul>
+
+        <!-- RIGHT: auth buttons -->
+        <div class="d-flex gap-2 ms-auto">
+          <a class="btn btn-outline-primary" sec:authorize="isAnonymous()" href="/login">Login</a>
+          <a class="btn btn-primary" sec:authorize="isAnonymous()" href="/register">Register</a>
+
+          <a class="btn btn-outline-primary" sec:authorize="isAuthenticated()" href="/me/bookings">My bookings</a>
+          <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="m-0">
+            <button class="btn btn-primary">Logout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+

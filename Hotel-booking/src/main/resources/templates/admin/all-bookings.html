@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bookings | Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+
+<main class="page-container page-container--wide">
+    <section class="section glass-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Booking log</p>
+                <h2>All bookings</h2>
+            </div>
+        </div>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Preview</th>
+                <th>Dates</th>
+                <th>Status</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.id}"></td>
+                <td th:text="${booking.user.email}"></td>
+                <td th:text="${booking.room.title}"></td>
+                <td>
+                    <img class="thumb img-fluid" th:src="${booking.room.displayImage}" th:alt="${booking.room.title}" loading="lazy">
+                </td>
+                <td th:text="${#temporals.format(booking.checkIn,'dd MMM yyyy')} + ' - ' + ${#temporals.format(booking.checkOut,'dd MMM yyyy')}"></td>
+                <td th:text="${booking.status}"></td>
+                <td th:text="'₹' + ${#numbers.formatDecimal(booking.totalPrice,0,'COMMA',2,'POINT')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>
