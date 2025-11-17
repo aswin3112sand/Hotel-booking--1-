@@ -1,0 +1,10 @@
+<div th:fragment="toast">
+    <div class="toast toast--error" th:if="${error}">
+        <p th:text="${error}">Something went wrong.</p>
+    </div>
+    <div class="toast toast--success" th:if="${msg}">
+        <p th:text="${msg}">Booked successfully.</p>
+        <a class="toast-link" th:if="${toastLink}" th:href="${toastLink}"
+           th:text="${toastLinkText != null ? toastLinkText : 'View my bookings'}"></a>
+    </div>
+</div>

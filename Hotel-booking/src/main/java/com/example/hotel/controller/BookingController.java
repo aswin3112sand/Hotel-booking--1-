@@ -40,6 +40,9 @@ public class BookingController {
         try {
             Booking booking = bookingService.createBooking(user.getUsername(), request);
             model.addAttribute("booking", booking);
+            model.addAttribute("msg", "Booking confirmed! See you soon.");
+            model.addAttribute("toastLink", "/user/bookings");
+            model.addAttribute("toastLinkText", "View my bookings");
             return "booking-confirm";
         } catch (RuntimeException ex) {
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
@@ -47,4 +50,3 @@ public class BookingController {
         }
     }
 }
-

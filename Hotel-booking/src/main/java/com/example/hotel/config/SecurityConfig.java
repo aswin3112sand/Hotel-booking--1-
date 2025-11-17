@@ -64,7 +64,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/home", "/login", "/register", "/auth/**",
                         "/css/**", "/js/**", "/image/**", "/images/**", "/uploads/**", "/webjars/**", "/favicon.ico", "/error").permitAll()
                 .requestMatchers(HttpMethod.GET, "/rooms/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/rooms/*/book").hasRole("USER")
+                // Let controller handle redirecting unauthenticated users so they see the login page
+                .requestMatchers(HttpMethod.POST, "/rooms/*/book").permitAll()
                 .requestMatchers("/user/**").hasRole("USER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated())

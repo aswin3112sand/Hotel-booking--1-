@@ -8,6 +8,7 @@
 </head>
 <body class="app-body luxury-bg">
 <div th:replace="fragments/header :: siteHeader"></div>
+<div th:insert="fragments/toast :: toast"></div>
 
 <main class="page-container">
     <section class="section glass-panel room-details">
@@ -31,10 +32,9 @@
                 <span th:text="${room.amenities}"></span>
             </div>
 
-            <div class="alert error" th:if="${error}" th:text="${error}"></div>
-
             <form class="booking-form" th:action="@{'/rooms/' + ${room.id} + '/book'}"
                   th:object="${bookingRequest}" method="post">
+                <input type="hidden" th:field="*{roomId}">
                 <div class="form-group">
                     <label>Check in</label>
                     <input type="date" th:field="*{checkIn}" required>

@@ -52,3 +52,79 @@
     ctx.fillText(value, x + barWidth / 3, y - 10);
   });
 })();
+
+(function roomFilters(){
+  const filterForm = document.getElementById('roomFilters');
+  const grid = document.getElementById('roomGrid');
+  if(!filterForm || !grid) return;
+  const cards = Array.from(grid.querySelectorAll('.room-card'));
+  const cityInput = filterForm.querySelector('[data-filter="city"]');
+  const typeInput = filterForm.querySelector('[data-filter="type"]');
+  const minInput = filterForm.querySelector('[data-filter="minPrice"]');
+  const maxInput = filterForm.querySelector('[data-filter="maxPrice"]');
+
+  const applyFilters = () => {
+    const city = cityInput?.value.trim().toLowerCase() || '';
+    const type = typeInput?.value || '';
+    const minPrice = Number(minInput?.value);
+    const maxPrice = Number(maxInput?.value);
+
+    cards.forEach(card => {
+      const price = Number(card.dataset.price || 0);
+      const cardCity = (card.dataset.city || '').toLowerCase();
+      const cardType = card.dataset.type || '';
+      const matchesCity = !city || cardCity.includes(city);
+      const matchesType = !type || cardType === type;
+      const matchesMin = isNaN(minPrice) || price >= minPrice;
+      const matchesMax = isNaN(maxPrice) || price <= maxPrice;
+      card.classList.toggle('room-card--hidden', !(matchesCity && matchesType && matchesMin && matchesMax));
+    });
+  };
+
+  [cityInput, typeInput, minInput, maxInput].forEach(input => {
+    input?.addEventListener('input', applyFilters);
+  });
+
+  document.getElementById('jumpToFilters')?.addEventListener('click', () => {
+    filterForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    cityInput?.focus();
+  });
+})();
+
+(function bookingModal(){
+  const modal = document.getElementById('bookingModal');
+  const backdrop = document.getElementById('bookingBackdrop');
+  const form = document.getElementById('modalBookingForm');
+  if(!modal || !form || !backdrop) return;
+
+  const titleEl = modal.querySelector('#modalTitle');
+  const availabilityEl = modal.querySelector('#modalAvailability');
+  const roomIdInput = form.querySelector('[name="roomId"]');
+  const toggleVisibility = (visible) => {
+    modal.classList.toggle('modal--visible', visible);
+    backdrop.classList.toggle('modal--visible', visible);
+  };
+
+  const close = () => toggleVisibility(false);
+
+  document.querySelectorAll('.js-open-booking').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const roomId = btn.dataset.roomId;
+      const roomTitle = btn.dataset.roomTitle;
+      const available = btn.dataset.roomAvailable === 'true';
+      form.action = `/rooms/${roomId}/book`;
+      roomIdInput.value = roomId;
+      titleEl.textContent = `Reserve ${roomTitle}`;
+      availabilityEl.textContent = available ? 'Available now—confirm your dates.' : 'Limited inventory. Confirm soon to lock it in.';
+      toggleVisibility(true);
+    });
+  });
+
+  backdrop.addEventListener('click', close);
+  modal.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', close));
+  document.addEventListener('keydown', event => {
+    if(event.key === 'Escape') {
+      close();
+    }
+  });
+})();

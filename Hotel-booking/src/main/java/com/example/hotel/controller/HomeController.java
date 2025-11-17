@@ -1,5 +1,6 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.dto.BookingRequest;
 import com.example.hotel.service.BookingService;
 import com.example.hotel.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,9 @@ public class HomeController {
 
   @GetMapping("/")
   public String landing(Model model) {
-    model.addAttribute("featuredRooms", roomService.featuredRooms(3));
+    model.addAttribute("featuredRooms", roomService.featuredRooms(8));
     model.addAttribute("latestRooms", roomService.latestRooms(4));
+    model.addAttribute("bookingRequest", new BookingRequest());
     long totalRooms = roomService.countRooms();
     long activeBookings = bookingService.countActiveBookings();
     long confirmedBookings = bookingService.countConfirmedBookings();
