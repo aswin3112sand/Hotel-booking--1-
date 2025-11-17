@@ -19,6 +19,7 @@ WORKDIR /app
 RUN useradd -ms /bin/sh spring
 
 COPY --from=build /workspace/target/*.jar app.jar
+RUN chown -R spring:spring /app
 
 EXPOSE 9090
 USER spring
