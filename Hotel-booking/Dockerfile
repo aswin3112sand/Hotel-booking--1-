@@ -1,13 +1,24 @@
-# Build stage: compile the Spring Boot application
-FROM maven:3.9-eclipse-temurin-21 AS build
-WORKDIR /app
+# Multi-stage build that compiles the Spring Boot app with Maven and
+# runs it from a slim Temurin JRE image.
+
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /workspace
+
+# Copy pom first so dependency downloads get cached when only source changes
 COPY pom.xml ./
+RUN mvn -q -B dependency:go-offline
+
 COPY src ./src
 RUN mvn -q -DskipTests package
 
-# Runtime stage: lightweight JRE image
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=build /app/target/hotel-booking-0.0.1-SNAPSHOT.jar app.jar
+
+# Drop privileges for the running process
+RUN useradd -ms /bin/sh spring
+
+COPY --from=build /workspace/target/*.jar app.jar
+
 EXPOSE 9090
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+USER spring
+ENTRYPOINT ["java","-jar","app.jar"]
