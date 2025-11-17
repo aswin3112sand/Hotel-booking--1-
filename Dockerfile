@@ -5,10 +5,11 @@ FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /workspace
 
 # Copy pom first so dependency downloads get cached when only source changes
-COPY pom.xml ./
+COPY Hotel-booking/pom.xml ./
 RUN mvn -q -B dependency:go-offline
 
-COPY src ./src
+# Copy application sources from the nested module directory
+COPY Hotel-booking/src ./src
 RUN mvn -q -DskipTests package
 
 FROM eclipse-temurin:17-jre
