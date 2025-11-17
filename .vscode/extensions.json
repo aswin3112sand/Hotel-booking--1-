@@ -3,6 +3,7 @@
         "danielsanmedium.dscodegpt",
         "tabnine.tabnine-vscode",
         "openai.chatgpt",
-        "ritwickdey.liveserver"
+        "ritwickdey.liveserver",
+        "lyzoai.lyzo-ai"
     ]
 }
