@@ -5,7 +5,6 @@ import com.hotelbooking.model.User;
 import com.hotelbooking.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,13 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repo.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        String normalizedEmail = email == null ? "" : email.trim().toLowerCase();
+        if (normalizedEmail.isBlank()) {
+            throw new UsernameNotFoundException("Invalid email or password");
+        }
+
+        User user = repo.findByEmail(normalizedEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("Invalid email or password"));
 
         Role role = user.getRole() == null ? Role.USER : user.getRole();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
