@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Hotel Bliss</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body luxury-bg">
+<div th:replace="fragments/header :: siteHeader"></div>
+<div th:insert="fragments/toast :: toast"></div>
+
+<main class="page-container page-container--narrow">
+    <section class="section glass-panel confirmation-card">
+        <p class="eyebrow">Complete payment</p>
+        <h1>Checkout</h1>
+        <p class="subtitle">Confirm your payment for <span th:text="${booking.room.title}"></span>.</p>
+
+        <div class="alert error" th:if="${error}" th:text="${error}"></div>
+        <div class="alert success" th:if="${msg}" th:text="${msg}"></div>
+
+        <div class="confirm-grid">
+            <div>
+                <h4>Booking</h4>
+                <p th:text="'HB' + ${booking.id}"></p>
+            </div>
+            <div>
+                <h4>Dates</h4>
+                <p th:text="${#temporals.format(booking.checkIn, 'dd MMM yyyy')} + ' → ' + ${#temporals.format(booking.checkOut, 'dd MMM yyyy')}"></p>
+            </div>
+            <div>
+                <h4>Total</h4>
+                <p th:text="'₹' + ${#numbers.formatDecimal(payment.amount, 0, 'COMMA', 2, 'POINT')}"></p>
+            </div>
+            <div>
+                <h4>Payment status</h4>
+                <span class="status-chip" th:text="${payment.status}"></span>
+            </div>
+        </div>
+
+        <form class="stack gap" th:action="@{'/payments/' + ${payment.id} + '/confirm'}" method="post">
+            <label for="method" class="form-label">Choose payment method</label>
+            <select id="method" name="method" required>
+                <option value="" disabled th:if="${payment.method == null}" selected>Select a method</option>
+                <option th:each="m : ${paymentMethods}"
+                        th:value="${m}"
+                        th:text="${m}"
+                        th:selected="${payment.method == m}"></option>
+            </select>
+            <button class="btn btn-primary" type="submit"
+                    th:text="'Pay ₹' + ${#numbers.formatDecimal(payment.amount, 0, 'COMMA', 2, 'POINT')}"></button>
+        </form>
+
+        <form class="mt-2" th:action="@{'/payments/' + ${payment.id} + '/fail'}" method="post">
+            <button class="btn btn-outline" type="submit">Mark as failed / retry later</button>
+        </form>
+
+        <div class="hero-actions">
+            <a class="btn btn-outline" th:href="@{/user/bookings}">Back to my bookings</a>
+            <a class="btn btn-ghost" th:href="@{/rooms}">Explore rooms</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

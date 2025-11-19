@@ -58,12 +58,14 @@
   const grid = document.getElementById('roomGrid');
   if(!filterForm || !grid) return;
   const cards = Array.from(grid.querySelectorAll('.room-card'));
+  const searchInput = filterForm.querySelector('[data-filter="search"]');
   const cityInput = filterForm.querySelector('[data-filter="city"]');
   const typeInput = filterForm.querySelector('[data-filter="type"]');
   const minInput = filterForm.querySelector('[data-filter="minPrice"]');
   const maxInput = filterForm.querySelector('[data-filter="maxPrice"]');
 
   const applyFilters = () => {
+    const search = searchInput?.value.trim().toLowerCase() || '';
     const city = cityInput?.value.trim().toLowerCase() || '';
     const type = typeInput?.value || '';
     const minPrice = Number(minInput?.value);
@@ -72,22 +74,24 @@
     cards.forEach(card => {
       const price = Number(card.dataset.price || 0);
       const cardCity = (card.dataset.city || '').toLowerCase();
+      const cardTitle = (card.dataset.title || '').toLowerCase();
       const cardType = card.dataset.type || '';
+      const matchesSearch = !search || cardTitle.includes(search) || cardCity.includes(search);
       const matchesCity = !city || cardCity.includes(city);
       const matchesType = !type || cardType === type;
       const matchesMin = isNaN(minPrice) || price >= minPrice;
       const matchesMax = isNaN(maxPrice) || price <= maxPrice;
-      card.classList.toggle('room-card--hidden', !(matchesCity && matchesType && matchesMin && matchesMax));
+      card.classList.toggle('room-card--hidden', !(matchesSearch && matchesCity && matchesType && matchesMin && matchesMax));
     });
   };
 
-  [cityInput, typeInput, minInput, maxInput].forEach(input => {
+  [searchInput, cityInput, typeInput, minInput, maxInput].forEach(input => {
     input?.addEventListener('input', applyFilters);
   });
 
   document.getElementById('jumpToFilters')?.addEventListener('click', () => {
     filterForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    cityInput?.focus();
+    searchInput?.focus();
   });
 })();
 

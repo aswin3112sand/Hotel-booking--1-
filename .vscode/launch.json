@@ -30,6 +30,16 @@
             "projectName": "Hotel-booking",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HotelBookingSystemApplication<Hotel-booking>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hotelbooking.HotelBookingSystemApplication",
+            "projectName": "Hotel-booking",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

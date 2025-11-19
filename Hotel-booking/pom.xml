@@ -11,11 +11,11 @@
     <relativePath/>
   </parent>
 
-  <groupId>com.example</groupId>
+  <groupId>com.hotelbooking</groupId>
   <artifactId>hotel-booking</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Hotel Booking</name>
-  <description>Demo project for Spring Boot</description>
+  <name>Hotel Booking System</name>
+  <description>Hotel Booking System with Thymeleaf</description>
 
   <!-- Use Java 17 for broad compatibility with Spring Boot 3.x -->
   <properties>
@@ -87,24 +87,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- JJWT (modern modules) -->
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-api</artifactId>
-      <version>0.11.5</version>
-    </dependency>
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-impl</artifactId>
-      <version>0.11.5</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-jackson</artifactId>
-      <version>0.11.5</version>
-      <scope>runtime</scope>
-    </dependency>
 <!--bootstrap -->
     <dependency>
   <groupId>org.webjars</groupId>
