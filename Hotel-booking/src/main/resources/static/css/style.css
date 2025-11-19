@@ -1142,7 +1142,10 @@ select:focus {
 
 /* BOOKING */
 .booking-card {
-  gap:22px;
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr 1fr auto;
+  align-items:center;
+  gap:18px;
 }
 
 .booking-card .booking-header {
@@ -1156,6 +1159,9 @@ select:focus {
   padding:8px 18px;
   background:rgba(255,255,255,0.08);
   border:1px solid rgba(255,255,255,0.2);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
 }
 
 .booking-form {
@@ -1505,6 +1511,13 @@ select:focus {
   }
   .booking-form button {
     grid-column:1 / -1;
+  }
+  .booking-card {
+    grid-template-columns:1fr;
+    align-items:flex-start;
+  }
+  .booking-card > div:last-child {
+    justify-self:start;
   }
   section,
   .glass-panel,
