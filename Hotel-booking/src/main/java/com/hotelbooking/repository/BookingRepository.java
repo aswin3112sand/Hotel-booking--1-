@@ -26,7 +26,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("""
       select b from Booking b
       left join fetch b.room
-      left join fetch b.payment
       where b.user.email = :email
       order by b.createdAt desc
     """)
